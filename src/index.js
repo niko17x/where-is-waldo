@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { initializeApp } from "firebase/app";
 import App from "./App";
+import "./styles.css";
 
 // Import the functions you need from the SDKs you need
 
