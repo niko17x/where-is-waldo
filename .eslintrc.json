@@ -8,7 +8,8 @@
   },
   "extends": ["airbnb-base", "prettier", "eslint:recommended", "plugin:react/recommended", "plugin:react/jsx-runtime"],
   "plugins": [
-    "react"
+    "react",
+    "import"
   ],
   "overrides": [{
     // Allows for 'test' and 'expect' KW during Jest testing:
@@ -21,6 +22,15 @@
       "ecmaVersion": "latest"
   },
   "rules": {
+    // "import/no-unresolved": "error",
+    // "import/named": "error",
+    // "import/default": "error",
+    // "import/namespace": "error",
+    // "import/export": "error",
+    // "import/no-named-as-default": "error",
+    // "import/no-named-as-default-member": "error",
+    // "import/no-extraneous-dependencies": "error",
+
     // Personal comments do not require empty lines:
     "lines-around-comment": [
      "error",
