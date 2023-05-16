@@ -6,7 +6,10 @@
       // Allows for 'test' and 'expect' KW during Jest testing:
       "jest": true
   },
-  "extends": ["airbnb-base", "prettier"],
+  "extends": ["airbnb-base", "prettier", "eslint:recommended", "plugin:react/recommended", "plugin:react/jsx-runtime"],
+  "plugins": [
+    "react"
+  ],
   "overrides": [{
     // Allows for 'test' and 'expect' KW during Jest testing:
     "files": [
