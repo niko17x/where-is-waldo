@@ -1,3 +1,5 @@
+/* GENERAL */
+
 *, *::after, *::before {
   margin: 0;
   padding: 0;
@@ -5,4 +7,31 @@
 }
 
 body {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Main.js */
+
+.main--container {
+  display: grid;
+  justify-items: center;
+}
+
+/* GameImage.js */
+
+.game_image-container {
+  display: grid;
+  place-items: center;
+}
+
+/* CharacterImage.js */
+
+.character_image--container {
+  width: 800px;
+  display: grid;
+  justify-items:center;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }

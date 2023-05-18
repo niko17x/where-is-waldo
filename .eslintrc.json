@@ -22,6 +22,9 @@
       "ecmaVersion": "latest"
   },
   "rules": {
+    // * Begin React Rules:
+    "react/prop-types": 0,
+    "no-unused-vars": "off",
     // "import/no-unresolved": "error",
     // "import/named": "error",
     // "import/default": "error",
@@ -30,6 +33,8 @@
     // "import/no-named-as-default": "error",
     // "import/no-named-as-default-member": "error",
     // "import/no-extraneous-dependencies": "error",
+
+    // * End React Rules:
 
     // Personal comments do not require empty lines:
     "lines-around-comment": [
