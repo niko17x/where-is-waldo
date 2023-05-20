@@ -1,20 +1,26 @@
 import React from "react";
+import generateCharacterImages from "../utilities/mapAllCharacters";
 
-function CharacterImage({ allCharacters }) {
-  const getCharacterImage = () =>
-    allCharacters.map((character) => (
-      <div className="character_image" key={character.id}>
-        <img
-          src={`../../${character.image}`}
-          alt=""
-          height={"160px"}
-          width={"auto"}
-        />
-      </div>
-    ));
+function CharacterImage({
+  allCharacters,
+  showCharacters,
+  toggleShowCharacters,
+}) {
+  const getCharacterImage = generateCharacterImages(allCharacters);
 
   return (
-    <div className="character_image--container">{getCharacterImage()}</div>
+    <div onClick={toggleShowCharacters}>
+      {showCharacters ? (
+        <div className="character_image--container">
+          {getCharacterImage}
+          <div className="overlay">Hide Characters</div>
+        </div>
+      ) : (
+        <div className="character_image--show_characters">
+          <button className="character_image--button">Show Characters</button>
+        </div>
+      )}
+    </div>
   );
 }
 
