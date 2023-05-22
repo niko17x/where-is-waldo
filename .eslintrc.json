@@ -63,8 +63,8 @@
      "double",
      { "avoidEscape": true, "allowTemplateLiterals": false }
    ],
-   // Allows prettier to break up long lines of code if enabled:
-   "curly": ["error", "all"],
+   // Warns only when multiple line statements in if, else, for, while, do, blocks:
+   "curly": ["error", "multi-line"],
    // Using 'alert()' in code gives warning:
    "no-alert": "warn",
    // Throws an error if trying to call before defined:
@@ -92,7 +92,5 @@
     "ignoreReadBeforeAssign": true,
     "destructuring": "all"
     }]
-    // Allow for '.js' extensions during module import => i.e.: import { ships } from '.ships.js':
-    // "import/extensions": [<severity>, "always"]
  }
 }
