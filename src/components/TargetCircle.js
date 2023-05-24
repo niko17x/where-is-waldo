@@ -1,9 +1,9 @@
 import React from "react";
 
-const TargetCircle = ({ clickedCoordinates }) => {
+const TargetCircle = ({ clickedCoordinates, targetFocused }) => {
   if (!clickedCoordinates.x || !clickedCoordinates.y) return null;
 
-  return (
+  return targetFocused ? (
     <img
       className="circle_target"
       src="./circle.png"
@@ -15,7 +15,7 @@ const TargetCircle = ({ clickedCoordinates }) => {
         top: `calc(${clickedCoordinates.y}% - 50px)`,
       }}
     />
-  );
+  ) : null;
 };
 
 export default TargetCircle;

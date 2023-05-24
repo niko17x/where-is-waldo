@@ -1,12 +1,12 @@
 import React from "react";
-import generateCharacterImages from "../utilities/mapAllCharacters";
+import generateCharacterImages from "../utilities/generateCharacterImages";
 
 function CharacterImage({
   allCharacters,
   showCharacters,
   toggleShowCharacters,
 }) {
-  const getCharacterImage = generateCharacterImages(allCharacters);
+  const getCharacterImage = generateCharacterImages(allCharacters, "160px");
 
   return (
     <div onClick={toggleShowCharacters}>

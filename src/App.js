@@ -5,7 +5,7 @@ import "./styles.css";
 import LandingPage from "./components/LandingPage";
 
 function App() {
-  const [gameInPlay, setGameInPlay] = useState(false);
+  const [gameInPlay, setGameInPlay] = useState(true);
   // const [charactersFound, setCharactersFound] = useState({});
   const [allCharacters, setAllCharacters] = useState(characterData);
 
@@ -15,8 +15,14 @@ function App() {
 
   return (
     <div className="app_container">
-      <LandingPage gameIsInPlay={gamePlayTrue} />
-      <Main allCharacters={allCharacters} gameInPlay={gameInPlay} />
+      {gameInPlay ? (
+        <Main allCharacters={allCharacters} gameInPlay={gameInPlay} />
+      ) : (
+        <LandingPage
+          gameIsInPlay={gamePlayTrue}
+          allCharacters={allCharacters}
+        />
+      )}
     </div>
   );
 }

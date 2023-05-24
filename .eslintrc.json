@@ -91,6 +91,7 @@
    "prefer-const": ["error", {
     "ignoreReadBeforeAssign": true,
     "destructuring": "all"
-    }]
+    }],
+    "no-console": "off"
  }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import CharacterImage from "./CharacterImage";
-import generateCharacterImages from "../utilities/mapAllCharacters";
+import generateCharacterImages from "../utilities/generateCharacterImages";
 
 function LandingPage({ gameIsInPlay, allCharacters }) {
   const getCharacterImage = generateCharacterImages(allCharacters);
