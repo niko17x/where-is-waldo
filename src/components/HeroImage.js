@@ -1,7 +1,7 @@
 import React from "react";
-import CharacterSelection from "./CharacterSelection";
+import CharacterSelector from "./CharacterSelector";
 
-const GameImage = ({ handleClick }) => (
+const HeroImage = ({ handleClick }) => (
   <div className="game_image-container">
     <img
       className="game_image"
@@ -14,4 +14,4 @@ const GameImage = ({ handleClick }) => (
   </div>
 );
 
-export default GameImage;
+export default HeroImage;

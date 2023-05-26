@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import characterData from "./characterData";
-import Main from "./components/Main";
+import Main from "./pages/Main";
 import "./styles.css";
 import LandingPage from "./components/LandingPage";
 

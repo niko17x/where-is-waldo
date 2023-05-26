@@ -1,5 +1,5 @@
 import React from "react";
-import CharacterImage from "./CharacterImage";
+import CharacterImageList from "./CharacterImageList";
 import generateCharacterImages from "../utilities/generateCharacterImages";
 
 function LandingPage({ gameIsInPlay, allCharacters }) {
