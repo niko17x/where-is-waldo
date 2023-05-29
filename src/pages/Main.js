@@ -4,37 +4,40 @@ import HeroImage from "../components/HeroImage";
 import TargetCircle from "../components/TargetCircle";
 import CharacterSelector from "../components/CharacterSelector";
 import FeedbackMessage from "../components/FeedbackMessage";
+import useTimer from "../components/UseTimer";
 
 // window.addEventListener("click", (e) => {
 //   console.log(e.target);
 // });
 
-const useTimer = (initialSeconds = 0, interval = 1000, deps = []) => {
-  const [seconds, setSeconds] = useState(() => initialSeconds);
+// const useTimer = (initialSeconds = 0, interval = 1000, deps = []) => {
+//   const [seconds, setSeconds] = useState(() => initialSeconds);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setSeconds((prev) => prev + 1);
-    }, interval);
-    return () => clearInterval(timer);
-  }, deps);
+//   useEffect(() => {
+//     const timer = setInterval(() => {
+//       setSeconds((prev) => prev + 1);
+//     }, interval);
+//     return () => clearInterval(timer);
+//   }, deps);
 
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
-  return `${minutes.toString().padStart(2, "0")}:${remainingSeconds
-    .toString()
-    .padStart(2, "0")}`;
-};
+//   const minutes = Math.floor(seconds / 60);
+//   const remainingSeconds = seconds % 60;
+//   return `${minutes.toString().padStart(2, "0")}:${remainingSeconds
+//     .toString()
+//     .padStart(2, "0")}`;
+// };
 
 function Main({ allCharacters, gameInPlay }) {
   const [messageContent, setMessageContent] = useState(null);
-  const [gameOn, setGameOn] = useState(false);
-  const [showCharacters, setShowCharacter] = useState(true);
   const [clickCoordinates, setClickCoordinates] = useState({});
   const [targetFocused, setTargetFocused] = useState(false);
+  const [gameOn, setGameOn] = useState(true);
   const clickedCharacter = useRef(0);
   const currentCoordinates = useRef({});
   const charactersFoundList = useRef([]);
+  const currentTime = useRef();
+
+  const displayTime = useTimer(0, 1000, [gameInPlay]);
 
   useEffect(() => {
     const heroImage = document.querySelector(".game_image");
@@ -47,23 +50,14 @@ function Main({ allCharacters, gameInPlay }) {
     };
   }, []);
 
-  const displayTime = useTimer(0, 1000, [gameInPlay]);
-
-  const toggleGameStatus = () => {
-    if (charactersFoundList.current.length >= 3) setGameOn((prev) => !prev);
-  };
+  useEffect(() => {
+    if (charactersFoundList.current.length >= 3) setGameOn(false);
+    currentTime.current = displayTime;
+  }, [charactersFoundList.current.length]);
 
   const isGameOver = () => {
     // If game is over: Display congrats message =>
-    if (gameOn) setMessageContent("You win! Awesome job!");
-  };
-
-  useEffect(() => {
-    isGameOver();
-  }, [gameOn]);
-
-  const toggleShowCharacters = () => {
-    setShowCharacter((prev) => !prev);
+    if (!gameOn) setMessageContent("You win! Awesome job!");
   };
 
   const matchCharacter = (e) => {
@@ -164,13 +158,14 @@ function Main({ allCharacters, gameInPlay }) {
     matchCharacter(event);
     const characterFound = validateCoordinates(event);
     isMatchFound(characterFound);
-    toggleGameStatus();
   };
 
   return (
     <div className="main--container">
       <div className="main--header">
-        <div className="render_timer">{gameInPlay ? displayTime : "0:00"}</div>
+        <div className="render_timer">
+          {gameOn ? displayTime : currentTime.current}
+        </div>
       </div>
       <div className="game-image-wrapper" style={{ position: "relative" }}>
         <HeroImage
