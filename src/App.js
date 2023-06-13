@@ -1,13 +1,31 @@
-import React, { useState } from "react";
-import characterData from "./characterData";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import characterData from "./data/characterData";
+import db from "./services/firestoreService";
 import Main from "./pages/Main";
 import "./styles.css";
 import LandingPage from "./components/LandingPage";
 
 function App() {
   const [gameInPlay, setGameInPlay] = useState(true);
-  // const [charactersFound, setCharactersFound] = useState({});
-  const [allCharacters, setAllCharacters] = useState(characterData);
+  const [allCharacters, setAllCharacters] = useState(null);
+
+  const fetchCharacterData = async () => {
+    const characterCollection = collection(db, "characterData");
+    const characterSnapshot = await getDocs(characterCollection);
+    const characterList = characterSnapshot.docs.map((document) =>
+      document.data()
+    );
+    return characterList;
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchCharacterData();
+      setAllCharacters(data);
+    };
+    fetchData();
+  }, []);
 
   const gamePlayTrue = () => {
     setGameInPlay(true);

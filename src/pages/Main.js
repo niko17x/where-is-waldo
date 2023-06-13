@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import CharacterImageList from "../components/CharacterImageList";
 import HeroImage from "../components/HeroImage";
 import TargetCircle from "../components/TargetCircle";
 import CharacterSelector from "../components/CharacterSelector";
 import FeedbackMessage from "../components/FeedbackMessage";
 import useTimer from "../components/UseTimer";
+import EndGameModal from "./EndGameModal";
+// import CharacterImageList from "../components/CharacterImageList";
 
 // window.addEventListener("click", (e) => {
 //   console.log(e.target);
@@ -32,6 +33,8 @@ function Main({ allCharacters, gameInPlay }) {
   const [clickCoordinates, setClickCoordinates] = useState({});
   const [targetFocused, setTargetFocused] = useState(false);
   const [gameOn, setGameOn] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(true);
   const clickedCharacter = useRef(0);
   const currentCoordinates = useRef({});
   const charactersFoundList = useRef([]);
@@ -50,15 +53,17 @@ function Main({ allCharacters, gameInPlay }) {
     };
   }, []);
 
-  useEffect(() => {
-    if (charactersFoundList.current.length >= 3) setGameOn(false);
-    currentTime.current = displayTime;
-  }, [charactersFoundList.current.length]);
-
   const isGameOver = () => {
-    // If game is over: Display congrats message =>
-    if (!gameOn) setMessageContent("You win! Awesome job!");
+    if (charactersFoundList.current.length > 2) {
+      setGameOn(false);
+      setShowModal(true);
+    }
+    currentTime.current = displayTime;
   };
+
+  useEffect(() => {
+    isGameOver();
+  }, [charactersFoundList.current.length]);
 
   const matchCharacter = (e) => {
     clickedCharacter.current = {
@@ -146,10 +151,14 @@ function Main({ allCharacters, gameInPlay }) {
           ...charactersFoundList.current,
           foundCharacter,
         ];
+        if (charactersFoundList.current.length < 3) {
+          messageContentInterval(`You Found ${foundCharacter.name}!`);
+        } else {
+          messageContentInterval("YOU WIN!");
+        }
       }
-      messageContentInterval(`You found ${foundCharacter.name}!`);
     } else {
-      messageContentInterval("Try again");
+      messageContentInterval("Try Again.");
     }
     setTargetFocused(false);
   };
@@ -162,6 +171,9 @@ function Main({ allCharacters, gameInPlay }) {
 
   return (
     <div className="main--container">
+      {showModal ? (
+        <EndGameModal timer={currentTime.current} showModal={showModal} />
+      ) : null}
       <div className="main--header">
         <div className="render_timer">
           {gameOn ? displayTime : currentTime.current}
